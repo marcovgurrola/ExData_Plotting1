@@ -25,7 +25,7 @@ fDateTime<-as.POSIXct(paste(pwrCons$Date, pwrCons$Time))
 #Plotting
 png(filename = 'plot3.png', width = 480, height = 480)
 plot(fDateTime, pwrCons$Sub_metering_1, type="l",col=c('black'),
-  ylab = 'Energy sub metering')
+  ylab = 'Energy sub metering', xlab = '')
 lines(fDateTime, pwrCons$Sub_metering_2, type="l",col=c('red'))
 lines(fDateTime, pwrCons$Sub_metering_3, type="l",col=c('blue'))
 legend('topright', pch=1, col=c('black', 'red', 'blue'),

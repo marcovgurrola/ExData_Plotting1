@@ -1,4 +1,4 @@
-#********** plot1.R: Global Active Power and its frequencies ************
+#********** plot2.R: Global Active Power per day names ************
 #Reading with read.table will get all the rows first, takes too much time
 #SQLDF faster @ this time, read and filter at ~ same time
 
@@ -19,11 +19,13 @@ pwrCons <- read.csv.sql(dataPath, sep=';', header=FALSE, skip=1,
 
 #Renaming columns and tidying data
 names(pwrCons) <- cnames[[1]]
+pwrCons[,'Date'] = as.Date(pwrCons[,'Date'], format = '%d/%m/%Y')
+fDateTime<-as.POSIXct(paste(pwrCons$Date, pwrCons$Time))
 
 #Plotting
-png(filename = 'plot1.png', width = 480, height = 480)
-with(pwrCons, hist(Global_active_power, main = 'Global Active Power',
-  col = c('red'), breaks = 12, xlab = 'Global Active Power(kilowatts)'))
+png(filename = 'plot2.png', width = 480, height = 480)
+plot(fDateTime, pwrCons$Global_active_power, type="l", xlab = '',
+     ylab = 'Global Active Power(kilowatts)')
 dev.off()
 
 closeAllConnections()
